@@ -1,10 +1,84 @@
 # ❤️ HeartGuard AI — Heart Disease Risk Prediction Platform
 
+<img width="1902" height="915" alt="image" src="https://github.com/user-attachments/assets/8e95d29c-bb74-455a-85b8-92e5c73b1be3" />
+
+
 > **Understand Your Heart Risk. Make Better Health Decisions.**
+<img width="1917" height="920" alt="image" src="https://github.com/user-attachments/assets/eb7b086b-4e9b-498a-8962-28a41a8d1c21" />
+
 
 A full-stack healthcare SaaS-style web app. Users create an account, complete a short health assessment, and receive an **educational** heart-risk estimate from a simple Logistic Regression model. They can track history, view charts, and download PDF reports. Admins manage users and assessments.
 
 > **Medical disclaimer.** HeartGuard AI provides an educational risk estimate based on the information provided. It is not a medical diagnosis and should not replace professional medical advice.
+
+## Features
+
+**For users**
+<img width="1911" height="922" alt="image" src="https://github.com/user-attachments/assets/2c38664f-7a99-4222-9a20-220d48497a09" />
+
+
+- **Account:** register and log in with email and password (password strength meter, client and server validation), "remember me", change password, edit name and email, delete account.
+- **Health assessment:** a four-section form (personal information, health measurements, heart information, lifestyle and profile) with units, tooltips ("Why do we ask this?"), min/max validation and toggle/radio controls.
+
+<img width="1898" height="922" alt="image" src="https://github.com/user-attachments/assets/7e905e8c-a8f7-4ab1-8dca-fd32b828dc90" />
+
+  
+- **Risk estimate:** the model's probability shown as a percentage on a Low / Moderate / Higher meter, with careful wording ("estimated risk", never "you have heart disease").
+- **Factors to consider:** plain-language notes generated from the values entered, for example blood pressure above the commonly used reference range.
+- **Safety notices:** a red notice for very high readings (blood pressure of 180 or more, cholesterol of 300 or more, fasting sugar of 126 or more) and an amber notice when age or heart rate falls outside the range the model learned from. They sit beside the estimate and never change it.
+- **Dashboard:** greeting, stat cards (total, low risk, higher risk, last assessment), a risk-overview donut chart, a trend line chart and a recent-assessments table.
+
+<img width="1913" height="917" alt="image" src="https://github.com/user-attachments/assets/bc6c8daf-f324-46be-bc35-5ad95edbb3c8" />
+
+
+  
+- **History:** filter by risk level, search by date or result, sort (newest, oldest, highest risk), view details, download PDF, delete.
+
+<img width="1905" height="911" alt="image" src="https://github.com/user-attachments/assets/0ae5ab68-9c68-4226-bf85-8a61e1f5b04f" />
+
+  
+- **Assessment details:** inputs, prediction, probability, factors and insights on one page.
+<img width="1913" height="923" alt="image" src="https://github.com/user-attachments/assets/0b70477d-55b4-4b9e-a5cc-7b2cf0b50b21" />
+
+  
+- **PDF reports:** branded report with user name, date, inputs, estimate, notes, insights and the medical disclaimer.
+
+<img width="621" height="832" alt="image" src="https://github.com/user-attachments/assets/f43bac0a-5cfc-4f2d-ac62-152de84c4562" />
+
+  
+- **Reports page:** every assessment with a one-click PDF download.
+- **Health insights:** short educational cards on blood pressure, cholesterol, heart rate, physical activity, smoking and healthy lifestyle.
+<img width="1882" height="917" alt="image" src="https://github.com/user-attachments/assets/fbff8e90-302c-4418-9b13-88946007dad1" />
+
+
+**For administrators**
+- **Admin dashboard:** total users, total assessments, low and higher risk counts, 30-day assessment trend, risk distribution and recent assessments.
+- **User management:** search, view details and assessment count, activate or deactivate, delete (non-admin users only).
+- **Assessment management:** search by user, filter by risk level and date range, view details, delete inappropriate records.
+- Admins cannot deactivate or delete their own account, and public sign-up can never create an admin.
+
+**Interface and quality**
+- Custom CSS design system (variables, buttons, cards, badges, alerts, forms), no Tailwind.
+- Responsive from desktop to 360px: sidebar becomes a drawer, tables become stacked cards, forms go single column.
+- Loading skeletons, error states with "Try again", empty states with a call to action, toast notifications (no `alert()`).
+- Accessibility: labelled inputs, error messages tied to fields, keyboard-friendly dialogs and tooltips, visible focus states, reduced-motion support.
+
+## Functions and how they work
+
+| Area | Function | What it does |
+| --- | --- | --- |
+| Auth | `register` / `login` (`authController`) | Validates input, hashes the password with bcrypt, returns a JWT. Login uses one generic error for unknown email and wrong password. |
+| Auth | `protect` / `adminOnly` (`middleware/auth.js`) | Verifies the JWT, loads the user, blocks deactivated accounts and non-admins. |
+| Assessment | `assessmentService.create` | Maps the form to model inputs, calls the ML service, converts the probability into a level and saves it. |
+| ML bridge | `mlService.predict` | Calls `POST /predict` on the FastAPI service with a long timeout and one retry for cold starts. Returns a 503 with a friendly message if the service is down. |
+| Risk | `levelFromProbability` | Low below 33%, Moderate 33-65%, Higher 66% and above. |
+| Insights | `buildFactors`, `buildInsights`, `buildWarnings` | Generate educational explanations, general tips and safety notices from the stored inputs (computed on read, not stored). |
+| Analytics | `userDashboard`, `adminStatistics` | Totals, distributions, trends and recent items from real database records. |
+| PDF | `streamReport` (`pdfService`) | Streams a formatted PDF for one assessment, owner-only. |
+| Client | `api.js` | Single Axios instance using `VITE_API_URL`, attaches the token, signs the user out on an expired session. |
+| Client | `useFetch` | Loads data and exposes `data`, `loading`, `error` and `reload` for every page's three states. |
+| ML | `train_model.py` | Loads data, cleans it, tunes regularisation with 5-fold cross-validation, evaluates on a held-out split and on cross-validation, saves the model and metrics. |
+| ML | `POST /predict` | Returns the probability and a label for the 8 model inputs. |
 
 ## Architecture
 
@@ -37,7 +111,8 @@ Honest notes:
 * **BMI, smoking, alcohol and physical activity are not in the dataset.** They are stored as optional profile information and labelled *"Not used in the estimate"* in the UI and PDF.
 * Risk bands applied to the probability: **Low < 33%, Moderate 33–65%, Higher ≥ 66%**.
 * The dataset is small and old. Treat the output as a demonstration of integrating a simple model, not as clinical guidance.
-* Metrics (accuracy, precision, recall, F1, ROC-AUC) are computed by `train_model.py` on a held-out split and printed when you train. Nothing is hardcoded.
+* Metrics (accuracy, precision, recall, F1, ROC-AUC) are computed by `train_model.py` on a held-out split **and** with 5-fold cross-validation, and printed when you train. Nothing is hardcoded. With about 300 rows, trust the cross-validated numbers more than the small test split.
+* The model can under-react to some single readings (for example very high blood pressure in a young patient), and it is unreliable outside ages 29-77. The app adds safety notices for these cases instead of altering the model.
 
 ## Local development
 
