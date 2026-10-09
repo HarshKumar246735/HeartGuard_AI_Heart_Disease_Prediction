@@ -1,9 +1,9 @@
 # ❤️ HeartGuard AI — Heart Disease Risk Prediction Platform
 
+**LIVE DEMO - https://heart-guard-ai-heart-disease-predic.vercel.app
+
 <img width="1902" height="915" alt="image" src="https://github.com/user-attachments/assets/8e95d29c-bb74-455a-85b8-92e5c73b1be3" />
 
-
-**LIVE DEMO - https://heart-guard-ai-heart-disease-predic.vercel.app/
 
 > **Understand Your Heart Risk. Make Better Health Decisions.**
 <img width="1917" height="920" alt="image" src="https://github.com/user-attachments/assets/eb7b086b-4e9b-498a-8962-28a41a8d1c21" />
