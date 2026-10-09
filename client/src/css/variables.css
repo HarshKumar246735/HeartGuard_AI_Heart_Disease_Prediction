@@ -1,0 +1,61 @@
+:root {
+  /* Brand */
+  --primary: #0e6b6b;
+  --primary-dark: #0a5252;
+  --primary-soft: #e3f0ef;
+  --ink: #10242b;
+  --accent: #e4685d;
+
+  /* Surfaces */
+  --background: #f2f6f5;
+  --surface: #ffffff;
+  --surface-alt: #f7faf9;
+  --border: #d9e3e2;
+  --border-strong: #b9cac8;
+
+  /* Text */
+  --text-primary: #10242b;
+  --text-secondary: #4d6168;
+  --text-muted: #6b7d83;
+
+  /* Semantic (all pass AA on their soft backgrounds) */
+  --success: #247a4d;
+  --success-soft: #e2f3ea;
+  --warning: #9a6200;
+  --warning-soft: #fbf0d9;
+  --danger: #b8372f;
+  --danger-soft: #fbe6e3;
+  --info: #25607f;
+  --info-soft: #e1eff6;
+
+  /* Radius system */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Shadow system */
+  --shadow-xs: 0 1px 2px rgba(16, 36, 43, 0.06);
+  --shadow-sm: 0 2px 8px rgba(16, 36, 43, 0.06);
+  --shadow: 0 8px 24px rgba(16, 36, 43, 0.08);
+  --shadow-lg: 0 20px 48px rgba(16, 36, 43, 0.14);
+
+  /* Typography */
+  --font-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* Spacing + layout */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 72px;
+  --sidebar-width: 256px;
+  --topbar-height: 64px;
+  --container: 1160px;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

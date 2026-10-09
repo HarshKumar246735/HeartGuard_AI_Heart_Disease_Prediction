@@ -1,0 +1,36 @@
+# Render Blueprint: deploys the FastAPI ML service and the Express API.
+# The React client is deployed separately on Vercel.
+services:
+  - type: web
+    name: heartguard-ml
+    runtime: python
+    rootDir: ml-service
+    plan: free
+    buildCommand: pip install -r requirements.txt && python training/train_model.py
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: MODEL_PATH
+        value: model/heart_model.joblib
+
+  - type: web
+    name: heartguard-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false            # paste your Atlas connection string in the Render dashboard
+      - key: JWT_SECRET
+        generateValue: true    # Render generates a strong random value
+      - key: ML_SERVICE_URL
+        sync: false            # e.g. https://heartguard-ml.onrender.com
+      - key: CLIENT_URL
+        sync: false            # e.g. https://your-app.vercel.app

@@ -1,0 +1,48 @@
+.result-page { max-width: 1100px; }
+.result-hero { position: relative; display: grid; grid-template-columns: 1fr auto; gap: 24px 32px; align-items: center; padding: 32px; border-radius: var(--radius-lg); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm); overflow: hidden; }
+.result-hero::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: var(--tone); }
+.tone-low { --tone: #2f855a; } .tone-moderate { --tone: #c58a1b; } .tone-higher { --tone: #c0392b; }
+.result-kicker { font-weight: 650; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 6px; }
+.result-hero h1 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); color: var(--tone); }
+.result-copy { margin-top: 10px; color: var(--text-secondary); max-width: 52ch; font-size: 1.02rem; }
+.result-date { margin-top: 8px; color: var(--text-muted); font-size: 0.88rem; }
+.result-score { font-family: var(--font-display); font-weight: 600; color: var(--ink); line-height: 1; display: flex; align-items: baseline; }
+.result-score span { font-size: clamp(3.4rem, 8vw, 5.4rem); }
+.result-score small { font-size: 1.6rem; color: var(--text-muted); margin-left: 2px; }
+.result-meter { grid-column: 1 / -1; }
+.result-disclaimer { margin-top: 20px; }
+.result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; align-items: start; }
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+.summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 20px; }
+.summary-grid.one-col { grid-template-columns: 1fr; gap: 10px; }
+.summary-grid dt { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+.summary-grid dd { margin: 2px 0 0; font-weight: 650; overflow-wrap: anywhere; }
+.summary-sub { margin: 22px 0 12px; font-size: 0.95rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+.factor-list { display: grid; gap: 14px; }
+.factor { display: flex; gap: 12px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--surface-alt); border: 1px solid var(--border); }
+.factor svg { flex: none; margin-top: 2px; }
+.factor h4 { font-size: 0.95rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 2px; }
+.factor p { color: var(--text-secondary); font-size: 0.9rem; }
+.factor-ok svg { color: var(--success); }
+.factor-note { background: var(--info-soft); border-color: #c3dcea; } .factor-note svg { color: var(--info); }
+.factor-attention { background: var(--warning-soft); border-color: #ecd49c; } .factor-attention svg { color: var(--warning); }
+
+.insight-list { display: grid; gap: 12px; }
+.insight-list li { display: flex; gap: 12px; align-items: flex-start; }
+.insight-list svg { flex: none; color: var(--primary); margin-top: 3px; }
+
+.back-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 650; margin-bottom: 14px; font-size: 0.93rem; }
+.detail-prediction-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+.detail-level { font-family: var(--font-display); font-size: 1.7rem; font-weight: 600; }
+.detail-prob { display: flex; align-items: baseline; gap: 8px; }
+.detail-prob span { font-family: var(--font-display); font-size: 2.2rem; font-weight: 600; }
+.detail-prob small { color: var(--text-muted); }
+
+.insight-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.insight-card { padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.insight-card > p { color: var(--text-secondary); font-size: 0.93rem; }
+.insight-card ul { display: grid; gap: 6px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.88rem; color: var(--text-secondary); }
+.insight-card li { padding-left: 16px; position: relative; }
+.insight-card li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
