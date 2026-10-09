@@ -26,6 +26,10 @@ A full-stack healthcare SaaS-style web app. Users create an account, complete a 
 - **Risk estimate:** the model's probability shown as a percentage on a Low / Moderate / Higher meter, with careful wording ("estimated risk", never "you have heart disease").
 - **Factors to consider:** plain-language notes generated from the values entered, for example blood pressure above the commonly used reference range.
 - **Safety notices:** a red notice for very high readings (blood pressure of 180 or more, cholesterol of 300 or more, fasting sugar of 126 or more) and an amber notice when age or heart rate falls outside the range the model learned from. They sit beside the estimate and never change it.
+<img width="1911" height="922" alt="image" src="https://github.com/user-attachments/assets/cb90f20d-5a22-45bf-aa9c-eb7e8f312010" />
+  
+
+  
 - **Dashboard:** greeting, stat cards (total, low risk, higher risk, last assessment), a risk-overview donut chart, a trend line chart and a recent-assessments table.
 
 <img width="1913" height="917" alt="image" src="https://github.com/user-attachments/assets/bc6c8daf-f324-46be-bc35-5ad95edbb3c8" />
